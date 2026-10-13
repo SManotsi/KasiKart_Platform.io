@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173f35">
+  <title>KasiKart — Your local shop, delivered.</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="KasiKart home"><span class="brand-mark">K</span><span>KasiKart<small>Your local shop, delivered.</small></span></a>
+    <nav class="desktop-nav"><a href="#how">How it works</a><a href="#impact">Our impact</a><a href="#partners">For partners</a></nav>
+    <div class="header-actions">
+      <label class="role-picker"><span>View as</span><select id="roleSelect"><option value="customer">Customer</option><option value="shop">Spaza owner</option><option value="runner">Delivery runner</option></select></label>
+      <button class="btn compact outline customer-only" id="trackOrderButton">Track order</button>
+      <button class="btn compact outline" id="registerButton">Register</button>
+      <button class="icon-button cart-button" id="cartButton" aria-label="Open cart">🛒 <span id="cartCount">0</span></button>
+    </div>
+  </header>
+
+  <main>
+    <section id="customerView" class="view active">
+      <section class="hero">
+        <div class="hero-copy"><span class="eyebrow">● Now delivering in Soweto</span><h1>Your kasi.<br><em>Your convenience.</em></h1><p>Everyday groceries from trusted shops around the corner, delivered by people from your community.</p><div class="hero-actions"><button class="btn primary" id="startShopping">Start shopping</button><button class="btn secondary" id="whatsappOrder">◉ Order on WhatsApp</button></div><div class="trust-row"><span>✓ No minimum order</span><span>✓ Cash or card</span><span>✓ Local delivery</span></div></div>
+        <div class="hero-art" aria-label="Illustration of local shopping"><div class="sun"></div><div class="shop-card"><span class="shop-awning">KASIKART</span><strong>Good Day<br>Spaza</strong><small>OPEN • 0.8 km away</small></div><div class="rider">🚲<span>On the way!</span></div><div class="floating-card">⚡ Average delivery<br><strong>24 minutes</strong></div></div>
+      </section>
+
+      <section class="search-wrap" id="shop"><div class="location"><span>📍</span><div><small>Delivering to</small><strong>Orlando West, Soweto</strong></div></div><label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Search bread, milk, airtime..."></label></section>
+      <section class="shops-section"><div class="section-heading"><div><span class="eyebrow dark">SHOPS NEAR YOU</span><h2>Choose where to shop</h2><p>Compare nearby stores, their delivery time, stock and prices.</p></div></div><div class="shop-grid" id="shopGrid"></div></section>
+      <section class="content-section"><div class="section-heading"><div><span class="eyebrow dark" id="selectedShopType">SELECTED SHOP</span><h2 id="selectedShopName">Good Day Spaza</h2><p id="selectedShopMeta">Everyday essentials available nearby.</p></div><button class="text-button" id="viewAll">View all stock →</button></div><div class="shop-stock-summary" id="shopStockSummary"></div><div class="categories" id="categories"></div><div class="product-grid" id="productGrid"></div></section>
+      <section class="how-section" id="how"><div class="section-heading centered"><div><span class="eyebrow dark">SIMPLE & LOCAL</span><h2>From the corner shop to your door</h2></div></div><div class="steps"><article><b>01</b><span class="step-icon">📱</span><h3>Choose what you need</h3><p>Browse nearby shops on the app or order using WhatsApp.</p></article><article><b>02</b><span class="step-icon">🏪</span><h3>Your spaza packs it</h3><p>The nearest available shop confirms and prepares your order.</p></article><article><b>03</b><span class="step-icon">🚲</span><h3>A local runner delivers</h3><p>A verified runner brings it to your door and earns locally.</p></article></div></section>
+      <section class="impact" id="impact"><div><span class="eyebrow">BUILT FOR THE KASI</span><h2>Every order keeps money moving in the community.</h2></div><div class="impact-stats"><span><strong>18</strong>local shops</span><span><strong>32</strong>active runners</span><span><strong>1,240+</strong>orders delivered</span></div></section>
+      <section class="partner-strip" id="partners"><div><span>🏪</span><div><h3>Own a spaza shop?</h3><p>Get a free digital storefront and reach more customers.</p></div><button class="btn primary" data-role="shop">Join as a shop</button></div><div><span>🚲</span><div><h3>Want to earn locally?</h3><p>Deliver in your area on your own schedule.</p></div><button class="btn dark" data-role="runner">Become a runner</button></div></section>
+    </section>
+
+    <section id="shopView" class="view dashboard-view"></section>
+    <section id="runnerView" class="view dashboard-view"></section>
+  </main>
+
+  <aside class="drawer" id="cartDrawer" aria-hidden="true"><div class="drawer-header"><div><small>YOUR BASKET</small><h2 id="cartShopName">Good Day Spaza</h2></div><button class="icon-button" id="closeCart">×</button></div><div id="cartItems" class="cart-items"></div><div class="cart-footer"><div><span>Items</span><strong id="subtotal">R0.00</strong></div><div><span>Delivery</span><strong id="deliveryCost">R15.00</strong></div><div class="total"><span>Total</span><strong id="total">R0.00</strong></div><button class="btn primary wide" id="checkoutButton">Continue to checkout</button></div></aside><div class="overlay" id="overlay"></div>
+
+  <dialog id="checkoutDialog"><button class="dialog-close" id="closeCheckout">×</button><div id="checkoutForm"><span class="eyebrow dark">ALMOST THERE</span><h2>Where should we deliver?</h2><label>Full name<input id="customerName" value="Thandi Mokoena"></label><label>Mobile number<input value="071 234 5678"></label><label>Delivery address<textarea>2187 Mooki Street, Orlando West</textarea></label><div class="payment-options"><label><input type="radio" name="payment" checked> 💳 Card / Instant EFT</label><label><input type="radio" name="payment"> 💵 Cash on delivery</label></div><button class="btn primary wide" id="placeOrder">Place order</button></div><div id="orderSuccess" class="success-state hidden"><span class="success-icon">✓</span><h2>Order received!</h2><p>Good Day Spaza is preparing your items. Your runner will arrive in approximately <strong>24 minutes</strong>.</p><div class="tracking"><span class="done">Order placed</span><span class="active">Shop preparing</span><span>Runner assigned</span><span>Delivered</span></div><button class="btn dark wide" id="doneOrder">Track order</button></div></dialog>
+
+  <dialog id="registerDialog" class="register-dialog"><button class="dialog-close" id="closeRegister">×</button><span class="eyebrow dark">JOIN KASIKART</span><h2>Create your account</h2><p class="dialog-intro">Choose how you want to use KasiKart. You can change roles later.</p><div class="role-cards"><button class="role-card active" data-register-role="customer"><span>🛍️</span><strong>Customer</strong><small>Order local essentials</small></button><button class="role-card" data-register-role="shop"><span>🏪</span><strong>Shop owner</strong><small>Sell through KasiKart</small></button><button class="role-card" data-register-role="runner"><span>🚲</span><strong>Runner</strong><small>Earn from deliveries</small></button></div><form id="registerForm"><input type="hidden" id="registerRole" value="customer"><div class="form-grid"><label>Full name<input id="registerName" required placeholder="Your full name"></label><label>Mobile number<input required type="tel" placeholder="e.g. 071 234 5678"></label></div><label>Email address <small>(optional)</small><input type="email" placeholder="name@example.com"></label><div id="roleSpecificFields"></div><label class="check-label"><input type="checkbox" required> I agree to the KasiKart terms and privacy notice.</label><button class="btn primary wide" type="submit">Create account</button></form></dialog>
+
+  <dialog id="trackingDialog" class="tracking-dialog"><button class="dialog-close" id="closeTracking">×</button><div class="track-top"><div><span class="eyebrow dark">ORDER #1049</span><h2>Your delivery is moving</h2><p id="trackStatusText">Good Day Spaza is packing your order.</p></div><div class="eta"><small>ESTIMATED ARRIVAL</small><strong id="etaValue">24 min</strong></div></div><div class="demo-map"><div class="map-road road-one"></div><div class="map-road road-two"></div><span class="map-pin shop-pin">🏪<small>Good Day Spaza</small></span><span class="runner-pin" id="runnerPin">🚲</span><span class="map-pin home-pin">🏠<small>Your home</small></span></div><div class="track-progress" id="trackProgress"><div class="track-step done"><i>✓</i><span><strong>Order confirmed</strong><small>09:41</small></span></div><div class="track-step active"><i>2</i><span><strong>Shop is packing</strong><small>In progress</small></span></div><div class="track-step"><i>3</i><span><strong>Runner is on the way</strong><small>Next</small></span></div><div class="track-step"><i>4</i><span><strong>Delivered</strong><small>Pending</small></span></div></div><div class="contact-card"><span class="contact-avatar">KM</span><div><strong>Kabelo Mokoena</strong><small>Your delivery runner • ⭐ 4.9</small></div><button class="btn compact outline" data-chat-with="runner">Message</button><button class="icon-button demo-call" title="Demo call">☎</button></div><div class="tracking-actions"><button class="btn outline" data-chat-with="shop">💬 Message shop</button><button class="btn dark" id="advanceTracking">Advance demo tracking</button></div></dialog>
+
+  <aside class="chat-panel" id="chatPanel"><div class="chat-header"><div><span class="contact-avatar" id="chatAvatar">GS</span><div><strong id="chatName">Good Day Spaza</strong><small><i></i> Online now</small></div></div><button class="icon-button" id="closeChat">×</button></div><div class="chat-order"><span>Order #1049</span><strong id="chatContext">5 items • Shop preparing</strong></div><div class="chat-messages" id="chatMessages"></div><div class="quick-replies" id="quickReplies"><button>Is my order ready?</button><button>Thank you!</button></div><form class="chat-compose" id="chatForm"><input id="chatInput" placeholder="Type a message..." autocomplete="off"><button class="btn primary" type="submit">Send</button></form></aside>
+
+  <div class="toast" id="toast"></div>
+  <footer><a class="brand footer-brand" href="#"><span class="brand-mark">K</span><span>KasiKart</span></a><p>Connecting township households, local shops and delivery runners.</p><span>Prototype • Soweto, South Africa</span></footer>
+  <script src="app.js"></script>
+</body>
+</html>
